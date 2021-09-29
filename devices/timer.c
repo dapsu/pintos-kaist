@@ -88,8 +88,7 @@ timer_elapsed (int64_t then) {
 }
 
 /* Suspends execution for approximately TICKS timer ticks. */
-void
-timer_sleep (int64_t ticks) {
+void timer_sleep (int64_t ticks) {
 	int64_t start = timer_ticks ();
 
 	ASSERT (intr_get_level () == INTR_ON);
@@ -98,7 +97,6 @@ timer_sleep (int64_t ticks) {
 	// 	thread_yield ();	// thread_yield(): 현재 CPU할당을 다른 스레드에게 양보하고 ready_list 제일 뒤로 이동
 
 	thread_sleep(start + ticks);
-
 }
 
 /* Suspends execution for approximately MS milliseconds. */
@@ -126,8 +124,7 @@ timer_print_stats (void) {
 }
 
 /* Timer interrupt handler. */
-static void
-timer_interrupt (struct intr_frame *args) {
+static void timer_interrupt (struct intr_frame *args) {
 	ticks++;
 	thread_tick ();
 
