@@ -19,20 +19,5 @@ Executing 'priority-donate-chain':
 (priority-donate-chain) main finishing with priority 0.
 (priority-donate-chain) end
 Execution of 'priority-donate-chain' complete.
-(priority-donate-chain) interloper 1 finished.
-Interrupt 0x0e (#PF Page-Fault Exception) at rip=8004209fd7
- cr2=0000000000000024 error=               0
-rax 0000000000000024 rbx 0000000000000000 rcx 0000000000000000 rdx 0000008004000d70
-rsp 0000008004236f50 rbp 0000008004236f70 rsi 0000008004000d70 rdi 0000000000000024
-rip 0000008004209fd7 r8 0000000000000000  r9 0000000000000000 r10 0000000000000000
-r11 0000000000000000 r12 0000000000000000 r13 0000000000000000 r14 0000000000000000
-r15 0000000000000000 rflags 00000206
-es: 0010 ds: 0010 cs: 0008 ss: 0010
-Kernel PANIC at ../../threads/interrupt.c:361 in intr_handler(): Unexpected interrupt
-Call stack: 0x8004213403 0x8004208984 0x8004208d36 0x8004209d56 0x8004219762 0x80042073a7.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 28 ticks
-Thread: 0 idle ticks, 28 kernel ticks, 0 user ticks
-Console: 1
+Timer: 27 ticks
+Thread: 0 idle t

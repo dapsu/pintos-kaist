@@ -117,6 +117,12 @@ void thread_awake(int64_t wakeup_tick) {
 	}
 }
 
+// 내림차순 정렬 만드는 함수
+bool compare_priority(struct list_elem *more, struct list_elem *less, void *aux UNUSED) {
+	return list_entry(more, struct thread, elem)->priority > list_entry(less, struct thread, elem)->priority;
+}
+
+
 /* If false (default), use round-robin scheduler.
    If true, use multi-level feedback queue scheduler.
    Controlled by kernel command-line option "-o mlfqs". */
@@ -160,8 +166,7 @@ static uint64_t gdt[3] = { 0, 0x00af9a000000ffff, 0x00cf92000000ffff };
 
    It is not safe to call thread_current() until this function
    finishes. */
-void
-thread_init (void) {
+void thread_init (void) {
 	ASSERT (intr_get_level () == INTR_OFF);
 
 	/* Reload the temporal gdt for the kernel
@@ -247,8 +252,7 @@ thread_print_stats (void) {
    The code provided sets the new thread's `priority' member to
    PRIORITY, but no actual priority scheduling is implemented.
    Priority scheduling is the goal of Problem 1-3. */
-tid_t
-thread_create (const char *name, int priority,
+tid_t thread_create (const char *name, int priority,
 		thread_func *function, void *aux) {
 	struct thread *t;
 	tid_t tid;
@@ -303,15 +307,14 @@ thread_block (void) {
    be important: if the caller had disabled interrupts itself,
    it may expect that it can atomically unblock a thread and
    update other data. */
-void
-thread_unblock (struct thread *t) {
+void thread_unblock (struct thread *t) {
 	enum intr_level old_level;
 
 	ASSERT (is_thread (t));
 
 	old_level = intr_disable ();
 	ASSERT (t->status == THREAD_BLOCKED);
-	list_push_back (&ready_list, &t->elem);
+	list_push_back (&ready_list, &t->elem);		// 현 상태: list_push_back()함수로 ready list의 마지막 부분에 스레드 추가
 	t->status = THREAD_READY;
 	intr_set_level (old_level);
 }
@@ -373,7 +376,7 @@ thread_yield (void) {
 
 	old_level = intr_disable ();
 	if (curr != idle_thread)
-		list_push_back (&ready_list, &curr->elem);
+		list_push_back (&ready_list, &curr->elem);		// 현 상태: list_push_back()함수로 ready list의 마지막 부분에 스레드 추가
 	do_schedule (THREAD_READY);
 	intr_set_level (old_level);
 }
