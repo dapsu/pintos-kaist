@@ -14,8 +14,20 @@ Executing 'priority-donate-one':
 (priority-donate-one) This should be the last line before finishing this test.
 (priority-donate-one) end
 Execution of 'priority-donate-one' complete.
-Timer: 25 ticks
-Thread: 0 idle ticks, 25 kernel ticks, 0 user ticks
-Console: 777 characters output
-Keyboard: 0 keys pressed
-Powering off...
+Timer: 27 ticks
+Interrupt 0x0e (#PF Page-Fault Exception) at rip=8004213ae4
+ cr2=0000000000008017 error=               2
+rax 000000000000800f rbx 0000000000000000 rcx 0000000000000000 rdx 0000008004234028
+rsp 0000008004234f20 rbp 0000008004234f30 rsi 0000008004234028 rdi 0000008004000f30
+rip 0000008004213ae4 r8 0000000000000000  r9 0000000000000000 r10 0000000000000000
+r11 0000000000000000 r12 0000000000000000 r13 0000000000000000 r14 0000000000000000
+r15 0000000000000000 rflags 00000006
+es: 0010 ds: 0010 cs: 0008 ss: 0010
+Kernel PANIC at ../../threads/interrupt.c:361 in intr_handler(): Unexpected interrupt
+Call stack: 0x8004213530 0x8004208ac0 0x8004208e72 0x8004213d21 0x8004209a8e 0x8004209eef 0x8004217af7 0x800420740c.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 29 ticks
+Thread: 0 idle ticks, 29 kernel ticks, 0 user ticks
+Console: 1
